@@ -74,7 +74,7 @@ jobs:
           echo "workdir=$INPUT_WORKDIR"
 
       - name: Setup Node.js
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # 6.3.0
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # 6.4.0
         with:
           node-version: lts/*
 
@@ -84,7 +84,7 @@ jobs:
           git config --system core.longpaths true
 
       - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # 6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # 7.0.0
         with:
           repository: ${{ inputs.repository || github.repository }}
           ref: ${{ inputs.ref || github.ref }}
@@ -99,7 +99,7 @@ jobs:
 
       - if: ${{ matrix.os == 'ubuntu-24.04' || matrix.os == 'windows-11' }}
         name: Setup LLVM
-        uses: tetherto/qvac/.github/actions/setup-llvm@0c819dd1110e4902223b1f7646cc0f1be2c9bc5c
+        uses: tetherto/qvac/.github/actions/setup-llvm@545b771c9e218ac3aca5f7afe693230f720574f0
 
       - if: ${{ matrix.os == 'ubuntu-24.04' }}
         name: Install Vulkan SDK on Linux
@@ -154,7 +154,7 @@ jobs:
         run: mkdir -p "${{ env.WORKDIR }}/vcpkg/cache"
 
       - name: Get vcpkg cache (package-local)
-        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # 5.0.4
+        uses: actions/cache@2c8a9bd7457de244a408f35966fab2fb45fda9c8 # 6.0.0
         with:
           key: >-
             cpp-tests-v4-${{ matrix.platform }}-${{ matrix.arch || 'x64' }}-${{
@@ -241,7 +241,7 @@ jobs:
 
       - name: Archive Coverage Results
         if: ${{ matrix.os == 'ubuntu-24.04' && always() }}
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # 7.0.0
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # 7.0.1
         with:
           name: cpp-coverage-report-${{ matrix.platform }}-${{ matrix.arch || 'x64' }}
           path: |
